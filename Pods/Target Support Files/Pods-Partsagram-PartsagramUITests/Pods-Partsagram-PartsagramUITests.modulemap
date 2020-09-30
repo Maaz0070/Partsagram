@@ -1,0 +1,6 @@
+framework module Pods_Partsagram_PartsagramUITests {
+  umbrella header "Pods-Partsagram-PartsagramUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
