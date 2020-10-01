@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             with: ParseClientConfiguration(block: { (configuration:
                 ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "Partsagram"
-                configuration.server = "http://desolate-savannah-03786.herokuapp.com/parse"
+                configuration.server = "https://desolate-savannah-03786.herokuapp.com/parse"
                 
             })
         )
