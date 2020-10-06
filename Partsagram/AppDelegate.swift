@@ -27,6 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             })
         )
+        
+        if PFUser.current() != nil { //check to see if parse suer is logged in
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            let feedNavigationController = main.instantiateViewController(withIdentifier: "FeedNavigationController") // have a instant of FeedNavigationContoller
+            window?.rootViewController = feedNavigationController //one window per application that controls anything else. Has rootViewCtonroller the one being displayed
+            
+        }
+        
         return true
     }
 
