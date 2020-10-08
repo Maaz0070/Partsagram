@@ -29,7 +29,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
         
             let query = PFQuery(className:"Posts")
-            query.includeKey("author")
+            query.includeKey(["author", "comments", "comments.author"])
         query.limit = 20
         
         query.findObjectsInBackground { (posts, error) in
@@ -40,15 +40,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->
+        Int {
+        let post = posts[section] //
+        let comments = (post["comments"] as? [PFObject]) ?? []  //grab the commetns and tel what it is
+            return comments.count + 1
     }
+    
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return posts.count
+        }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
+    
         
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
+        let comments = (post["comments"] as? [PFObject]) ?? []
        
-        
+        if indexPath.row == 0{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         let user = post["author"] as! PFUser
         cell.userNameLabel.text = user.username
         
@@ -61,6 +73,38 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.photoView.af_setImage(withURL: url)
         
         return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
+            
+            let commment = comments[indexPath.row - 1]
+            cell.nameLabel.text = comment["text"]
+            
+            let user = comment["author"] as! PFUser
+            cell.nameLabel.text = user.name
+            
+            return cell
+        }
+        
+    }
+
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = posts[indexPath.row] //row that you select is the indexpath and that is the post
+        let comment = PFObject(className: "Comments") //create comment as pfobject in class COments
+        comment["text"] = "This is a random comment"
+        comment["post"] = post //want comment to know what post it belongs to
+        comment["author"] = PFUser.current()! // who made the comment
+        
+        post.add(comment, forKey: "comments") //every post should have arrray of comments to which we add this comment
+        
+        post.saveInBackground { (success, error) in
+            if success {
+                print("Comment saved")
+            } else {
+                print("Error saving comment")
+            }
+        }
+        
         
     }
 
@@ -78,8 +122,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let main = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = main.instantiateViewController(withIdentifier: "LoginViewController")
         
-       let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.window?.rootViewController = loginViewController
+        let scene = UIApplication.shared.connectedScenes.first
+        if let delegate: SceneDelegate = (scene?.delegate as? SceneDelegate)
+        {
+            delegate.window?.rootViewController = loginViewController
+        }
+        
+      // let delegate = UIApplication.shared.delegate as! AppDelegate
+       // delegate.window?.rootViewController = loginViewController
     }
     
+
 }

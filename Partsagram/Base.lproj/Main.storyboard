@@ -87,7 +87,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="573" id="e6f-di-yov" customClass="PostCell" customModule="Partsagram" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="573" id="e6f-di-yov" customClass="PostCell" customModule="Partsagram" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="573"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e6f-di-yov" id="WNK-Uo-QKi">
@@ -100,9 +100,9 @@
                                                         <constraint firstAttribute="width" secondItem="0oA-qQ-Lec" secondAttribute="height" multiplier="199:264" id="Wbg-74-ZZ8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3R-S6-EF2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="maaz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3R-S6-EF2">
                                                     <rect key="frame" x="8" y="534" width="90" height="28"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -132,6 +132,41 @@
                                             <outlet property="captionLabel" destination="Ir6-SG-BwH" id="lc2-9a-Dxr"/>
                                             <outlet property="photoView" destination="0oA-qQ-Lec" id="ZY6-d9-hV5"/>
                                             <outlet property="userNameLabel" destination="X3R-S6-EF2" id="PTK-ok-jZ3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9vn-Nb-FeB" customClass="CommentCell" customModule="Partsagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="601" width="414" height="37.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vn-Nb-FeB" id="Y5G-Rc-p3W">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="maaz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0E6-Ma-8Xp">
+                                                    <rect key="frame" x="16" y="8" width="44" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5t3-3U-L7F">
+                                                    <rect key="frame" x="68" y="8" width="139.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5t3-3U-L7F" firstAttribute="top" secondItem="Y5G-Rc-p3W" secondAttribute="top" constant="8" id="1JM-6t-vxv"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5t3-3U-L7F" secondAttribute="bottom" constant="8" id="1sm-Ia-lY7"/>
+                                                <constraint firstItem="0E6-Ma-8Xp" firstAttribute="leading" secondItem="Y5G-Rc-p3W" secondAttribute="leading" constant="16" id="LAy-gv-rlY"/>
+                                                <constraint firstItem="5t3-3U-L7F" firstAttribute="leading" secondItem="0E6-Ma-8Xp" secondAttribute="trailing" constant="8" id="WOq-Uv-O50"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0E6-Ma-8Xp" secondAttribute="bottom" constant="8" id="WaR-S3-yRz"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5t3-3U-L7F" secondAttribute="trailing" constant="8" id="eqi-rg-mwY"/>
+                                                <constraint firstItem="0E6-Ma-8Xp" firstAttribute="top" secondItem="Y5G-Rc-p3W" secondAttribute="top" constant="8" id="p0c-yy-cWF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="5t3-3U-L7F" id="liq-SD-XpG"/>
+                                            <outlet property="nameLabel" destination="0E6-Ma-8Xp" id="mbb-ZJ-0Ot"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
