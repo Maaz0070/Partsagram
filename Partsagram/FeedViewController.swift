@@ -29,7 +29,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
         
             let query = PFQuery(className:"Posts")
-            query.includeKey(["author", "comments", "comments.author"])
+            query.includeKey("author")
+           query.includeKey("comments")
+        query.includeKey("comments.author")
         query.limit = 20
         
         query.findObjectsInBackground { (posts, error) in
@@ -43,8 +45,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->
         Int {
         let post = posts[section] //
+        let user = posts[section]
         let comments = (post["comments"] as? [PFObject]) ?? []  //grab the commetns and tel what it is
-            return comments.count + 1
+        let name = (user["firstName"] as? [PFObject]) ?? []
+        return comments.count + 1
     }
     
         func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,11 +80,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
             
-            let commment = comments[indexPath.row - 1]
-            cell.nameLabel.text = comment["text"]
+            let comment = comments[indexPath.row - 1]
+            cell.nameLabel.text = comment["text"] as! String
             
             let user = comment["author"] as! PFUser
-            cell.nameLabel.text = user.name
+            cell.nameLabel.text = user["name"] as! String
             
             return cell
         }
